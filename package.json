@@ -6,7 +6,7 @@
     "ng": "ng",
     "prestart": "pm2 gracefulReload process.yml",
     "start": "ng serve --host 0.0.0.0 --disable-host-check --watch",
-    "prebuild": "sed -i -- \"s/'.*'/'$(git log -n 1 --pretty=format:'%H')'/g\" src/lastcommithash.ts",
+    "prebuild": "npm run proto && sed -i -- \"s/'.*'/'$(git log -n 1 --pretty=format:'%H')'/g\" src/lastcommithash.ts",
     "build": "ng build --prod",
     "postbuild": "sed -i -- \"s/'.*'/''/g\" src/lastcommithash.ts && zopfli dist/*.js dist/*.css dist/*.html",
     "builddev": "npm run build -- --env ovhdev",

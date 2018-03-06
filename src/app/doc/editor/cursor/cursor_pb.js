@@ -15,15 +15,16 @@ $root.CursorMsg = (function() {
      * Properties of a CursorMsg.
      * @exports ICursorMsg
      * @interface ICursorMsg
-     * @property {IPositionMsg} [from] CursorMsg from
-     * @property {IPositionMsg} [to] CursorMsg to
-     * @property {State} [state] CursorMsg state
+     * @property {IPositionMsg|null} [from] CursorMsg from
+     * @property {IPositionMsg|null} [to] CursorMsg to
+     * @property {State|null} [state] CursorMsg state
      */
 
     /**
      * Constructs a new CursorMsg.
      * @exports CursorMsg
      * @classdesc Represents a CursorMsg.
+     * @implements ICursorMsg
      * @constructor
      * @param {ICursorMsg=} [properties] Properties to set
      */
@@ -36,7 +37,7 @@ $root.CursorMsg = (function() {
 
     /**
      * CursorMsg from.
-     * @member {(IPositionMsg|null|undefined)}from
+     * @member {IPositionMsg|null|undefined} from
      * @memberof CursorMsg
      * @instance
      */
@@ -44,7 +45,7 @@ $root.CursorMsg = (function() {
 
     /**
      * CursorMsg to.
-     * @member {(IPositionMsg|null|undefined)}to
+     * @member {IPositionMsg|null|undefined} to
      * @memberof CursorMsg
      * @instance
      */
@@ -52,7 +53,7 @@ $root.CursorMsg = (function() {
 
     /**
      * CursorMsg state.
-     * @member {State}state
+     * @member {State} state
      * @memberof CursorMsg
      * @instance
      */
@@ -153,14 +154,15 @@ $root.PositionMsg = (function() {
      * Properties of a PositionMsg.
      * @exports IPositionMsg
      * @interface IPositionMsg
-     * @property {sync.IIdentifierMsg} [id] PositionMsg id
-     * @property {number} [index] PositionMsg index
+     * @property {sync.IIdentifierMsg|null} [id] PositionMsg id
+     * @property {number|null} [index] PositionMsg index
      */
 
     /**
      * Constructs a new PositionMsg.
      * @exports PositionMsg
      * @classdesc Represents a PositionMsg.
+     * @implements IPositionMsg
      * @constructor
      * @param {IPositionMsg=} [properties] Properties to set
      */
@@ -173,7 +175,7 @@ $root.PositionMsg = (function() {
 
     /**
      * PositionMsg id.
-     * @member {(sync.IIdentifierMsg|null|undefined)}id
+     * @member {sync.IIdentifierMsg|null|undefined} id
      * @memberof PositionMsg
      * @instance
      */
@@ -181,7 +183,7 @@ $root.PositionMsg = (function() {
 
     /**
      * PositionMsg index.
-     * @member {number}index
+     * @member {number} index
      * @memberof PositionMsg
      * @instance
      */
@@ -268,15 +270,16 @@ $root.sync = (function() {
          * Properties of a SyncMsg.
          * @memberof sync
          * @interface ISyncMsg
-         * @property {sync.IRichLogootSOperationMsg} [richLogootSOpMsg] SyncMsg richLogootSOpMsg
-         * @property {sync.IQuerySyncMsg} [querySync] SyncMsg querySync
-         * @property {sync.IReplySyncMsg} [replySync] SyncMsg replySync
+         * @property {sync.IRichLogootSOperationMsg|null} [richLogootSOpMsg] SyncMsg richLogootSOpMsg
+         * @property {sync.IQuerySyncMsg|null} [querySync] SyncMsg querySync
+         * @property {sync.IReplySyncMsg|null} [replySync] SyncMsg replySync
          */
 
         /**
          * Constructs a new SyncMsg.
          * @memberof sync
          * @classdesc Represents a SyncMsg.
+         * @implements ISyncMsg
          * @constructor
          * @param {sync.ISyncMsg=} [properties] Properties to set
          */
@@ -289,7 +292,7 @@ $root.sync = (function() {
 
         /**
          * SyncMsg richLogootSOpMsg.
-         * @member {(sync.IRichLogootSOperationMsg|null|undefined)}richLogootSOpMsg
+         * @member {sync.IRichLogootSOperationMsg|null|undefined} richLogootSOpMsg
          * @memberof sync.SyncMsg
          * @instance
          */
@@ -297,7 +300,7 @@ $root.sync = (function() {
 
         /**
          * SyncMsg querySync.
-         * @member {(sync.IQuerySyncMsg|null|undefined)}querySync
+         * @member {sync.IQuerySyncMsg|null|undefined} querySync
          * @memberof sync.SyncMsg
          * @instance
          */
@@ -305,7 +308,7 @@ $root.sync = (function() {
 
         /**
          * SyncMsg replySync.
-         * @member {(sync.IReplySyncMsg|null|undefined)}replySync
+         * @member {sync.IReplySyncMsg|null|undefined} replySync
          * @memberof sync.SyncMsg
          * @instance
          */
@@ -316,7 +319,7 @@ $root.sync = (function() {
 
         /**
          * SyncMsg type.
-         * @member {string|undefined} type
+         * @member {"richLogootSOpMsg"|"querySync"|"replySync"|undefined} type
          * @memberof sync.SyncMsg
          * @instance
          */
@@ -402,20 +405,23 @@ $root.sync = (function() {
          * Properties of a RichLogootSOperationMsg.
          * @memberof sync
          * @interface IRichLogootSOperationMsg
-         * @property {number} [id] RichLogootSOperationMsg id
-         * @property {number} [clock] RichLogootSOperationMsg clock
-         * @property {sync.ILogootSAddMsg} [logootSAddMsg] RichLogootSOperationMsg logootSAddMsg
-         * @property {sync.ILogootSDelMsg} [logootSDelMsg] RichLogootSOperationMsg logootSDelMsg
+         * @property {number|null} [id] RichLogootSOperationMsg id
+         * @property {number|null} [clock] RichLogootSOperationMsg clock
+         * @property {sync.ILogootSAddMsg|null} [logootSAddMsg] RichLogootSOperationMsg logootSAddMsg
+         * @property {sync.ILogootSDelMsg|null} [logootSDelMsg] RichLogootSOperationMsg logootSDelMsg
+         * @property {Array.<sync.IDotMsg>|null} [dependencies] RichLogootSOperationMsg dependencies
          */
 
         /**
          * Constructs a new RichLogootSOperationMsg.
          * @memberof sync
          * @classdesc Represents a RichLogootSOperationMsg.
+         * @implements IRichLogootSOperationMsg
          * @constructor
          * @param {sync.IRichLogootSOperationMsg=} [properties] Properties to set
          */
         function RichLogootSOperationMsg(properties) {
+            this.dependencies = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -424,7 +430,7 @@ $root.sync = (function() {
 
         /**
          * RichLogootSOperationMsg id.
-         * @member {number}id
+         * @member {number} id
          * @memberof sync.RichLogootSOperationMsg
          * @instance
          */
@@ -432,7 +438,7 @@ $root.sync = (function() {
 
         /**
          * RichLogootSOperationMsg clock.
-         * @member {number}clock
+         * @member {number} clock
          * @memberof sync.RichLogootSOperationMsg
          * @instance
          */
@@ -440,7 +446,7 @@ $root.sync = (function() {
 
         /**
          * RichLogootSOperationMsg logootSAddMsg.
-         * @member {(sync.ILogootSAddMsg|null|undefined)}logootSAddMsg
+         * @member {sync.ILogootSAddMsg|null|undefined} logootSAddMsg
          * @memberof sync.RichLogootSOperationMsg
          * @instance
          */
@@ -448,18 +454,26 @@ $root.sync = (function() {
 
         /**
          * RichLogootSOperationMsg logootSDelMsg.
-         * @member {(sync.ILogootSDelMsg|null|undefined)}logootSDelMsg
+         * @member {sync.ILogootSDelMsg|null|undefined} logootSDelMsg
          * @memberof sync.RichLogootSOperationMsg
          * @instance
          */
         RichLogootSOperationMsg.prototype.logootSDelMsg = null;
+
+        /**
+         * RichLogootSOperationMsg dependencies.
+         * @member {Array.<sync.IDotMsg>} dependencies
+         * @memberof sync.RichLogootSOperationMsg
+         * @instance
+         */
+        RichLogootSOperationMsg.prototype.dependencies = $util.emptyArray;
 
         // OneOf field names bound to virtual getters and setters
         var $oneOfFields;
 
         /**
          * RichLogootSOperationMsg type.
-         * @member {string|undefined} type
+         * @member {"logootSAddMsg"|"logootSDelMsg"|undefined} type
          * @memberof sync.RichLogootSOperationMsg
          * @instance
          */
@@ -500,6 +514,9 @@ $root.sync = (function() {
                 $root.sync.LogootSAddMsg.encode(message.logootSAddMsg, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             if (message.logootSDelMsg != null && message.hasOwnProperty("logootSDelMsg"))
                 $root.sync.LogootSDelMsg.encode(message.logootSDelMsg, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.dependencies != null && message.dependencies.length)
+                for (var i = 0; i < message.dependencies.length; ++i)
+                    $root.sync.DotMsg.encode(message.dependencies[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             return writer;
         };
 
@@ -533,6 +550,11 @@ $root.sync = (function() {
                 case 4:
                     message.logootSDelMsg = $root.sync.LogootSDelMsg.decode(reader, reader.uint32());
                     break;
+                case 5:
+                    if (!(message.dependencies && message.dependencies.length))
+                        message.dependencies = [];
+                    message.dependencies.push($root.sync.DotMsg.decode(reader, reader.uint32()));
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -550,14 +572,15 @@ $root.sync = (function() {
          * Properties of a LogootSAddMsg.
          * @memberof sync
          * @interface ILogootSAddMsg
-         * @property {sync.IIdentifierMsg} [id] LogootSAddMsg id
-         * @property {string} [content] LogootSAddMsg content
+         * @property {sync.IIdentifierMsg|null} [id] LogootSAddMsg id
+         * @property {string|null} [content] LogootSAddMsg content
          */
 
         /**
          * Constructs a new LogootSAddMsg.
          * @memberof sync
          * @classdesc Represents a LogootSAddMsg.
+         * @implements ILogootSAddMsg
          * @constructor
          * @param {sync.ILogootSAddMsg=} [properties] Properties to set
          */
@@ -570,7 +593,7 @@ $root.sync = (function() {
 
         /**
          * LogootSAddMsg id.
-         * @member {(sync.IIdentifierMsg|null|undefined)}id
+         * @member {sync.IIdentifierMsg|null|undefined} id
          * @memberof sync.LogootSAddMsg
          * @instance
          */
@@ -578,7 +601,7 @@ $root.sync = (function() {
 
         /**
          * LogootSAddMsg content.
-         * @member {string}content
+         * @member {string} content
          * @memberof sync.LogootSAddMsg
          * @instance
          */
@@ -656,13 +679,14 @@ $root.sync = (function() {
          * Properties of an IdentifierMsg.
          * @memberof sync
          * @interface IIdentifierMsg
-         * @property {Array.<sync.IIdentifierTupleMsg>} [tuples] IdentifierMsg tuples
+         * @property {Array.<sync.IIdentifierTupleMsg>|null} [tuples] IdentifierMsg tuples
          */
 
         /**
          * Constructs a new IdentifierMsg.
          * @memberof sync
          * @classdesc Represents an IdentifierMsg.
+         * @implements IIdentifierMsg
          * @constructor
          * @param {sync.IIdentifierMsg=} [properties] Properties to set
          */
@@ -676,7 +700,7 @@ $root.sync = (function() {
 
         /**
          * IdentifierMsg tuples.
-         * @member {Array.<sync.IIdentifierTupleMsg>}tuples
+         * @member {Array.<sync.IIdentifierTupleMsg>} tuples
          * @memberof sync.IdentifierMsg
          * @instance
          */
@@ -752,16 +776,17 @@ $root.sync = (function() {
          * Properties of an IdentifierTupleMsg.
          * @memberof sync
          * @interface IIdentifierTupleMsg
-         * @property {number} [random] IdentifierTupleMsg random
-         * @property {number} [replicaNumber] IdentifierTupleMsg replicaNumber
-         * @property {number} [clock] IdentifierTupleMsg clock
-         * @property {number} [offset] IdentifierTupleMsg offset
+         * @property {number|null} [random] IdentifierTupleMsg random
+         * @property {number|null} [replicaNumber] IdentifierTupleMsg replicaNumber
+         * @property {number|null} [clock] IdentifierTupleMsg clock
+         * @property {number|null} [offset] IdentifierTupleMsg offset
          */
 
         /**
          * Constructs a new IdentifierTupleMsg.
          * @memberof sync
          * @classdesc Represents an IdentifierTupleMsg.
+         * @implements IIdentifierTupleMsg
          * @constructor
          * @param {sync.IIdentifierTupleMsg=} [properties] Properties to set
          */
@@ -774,7 +799,7 @@ $root.sync = (function() {
 
         /**
          * IdentifierTupleMsg random.
-         * @member {number}random
+         * @member {number} random
          * @memberof sync.IdentifierTupleMsg
          * @instance
          */
@@ -782,7 +807,7 @@ $root.sync = (function() {
 
         /**
          * IdentifierTupleMsg replicaNumber.
-         * @member {number}replicaNumber
+         * @member {number} replicaNumber
          * @memberof sync.IdentifierTupleMsg
          * @instance
          */
@@ -790,7 +815,7 @@ $root.sync = (function() {
 
         /**
          * IdentifierTupleMsg clock.
-         * @member {number}clock
+         * @member {number} clock
          * @memberof sync.IdentifierTupleMsg
          * @instance
          */
@@ -798,7 +823,7 @@ $root.sync = (function() {
 
         /**
          * IdentifierTupleMsg offset.
-         * @member {number}offset
+         * @member {number} offset
          * @memberof sync.IdentifierTupleMsg
          * @instance
          */
@@ -886,13 +911,14 @@ $root.sync = (function() {
          * Properties of a LogootSDelMsg.
          * @memberof sync
          * @interface ILogootSDelMsg
-         * @property {Array.<sync.IIdentifierIntervalMsg>} [lid] LogootSDelMsg lid
+         * @property {Array.<sync.IIdentifierIntervalMsg>|null} [lid] LogootSDelMsg lid
          */
 
         /**
          * Constructs a new LogootSDelMsg.
          * @memberof sync
          * @classdesc Represents a LogootSDelMsg.
+         * @implements ILogootSDelMsg
          * @constructor
          * @param {sync.ILogootSDelMsg=} [properties] Properties to set
          */
@@ -906,7 +932,7 @@ $root.sync = (function() {
 
         /**
          * LogootSDelMsg lid.
-         * @member {Array.<sync.IIdentifierIntervalMsg>}lid
+         * @member {Array.<sync.IIdentifierIntervalMsg>} lid
          * @memberof sync.LogootSDelMsg
          * @instance
          */
@@ -982,14 +1008,15 @@ $root.sync = (function() {
          * Properties of an IdentifierIntervalMsg.
          * @memberof sync
          * @interface IIdentifierIntervalMsg
-         * @property {sync.IIdentifierMsg} [idBegin] IdentifierIntervalMsg idBegin
-         * @property {number} [end] IdentifierIntervalMsg end
+         * @property {sync.IIdentifierMsg|null} [idBegin] IdentifierIntervalMsg idBegin
+         * @property {number|null} [end] IdentifierIntervalMsg end
          */
 
         /**
          * Constructs a new IdentifierIntervalMsg.
          * @memberof sync
          * @classdesc Represents an IdentifierIntervalMsg.
+         * @implements IIdentifierIntervalMsg
          * @constructor
          * @param {sync.IIdentifierIntervalMsg=} [properties] Properties to set
          */
@@ -1002,7 +1029,7 @@ $root.sync = (function() {
 
         /**
          * IdentifierIntervalMsg idBegin.
-         * @member {(sync.IIdentifierMsg|null|undefined)}idBegin
+         * @member {sync.IIdentifierMsg|null|undefined} idBegin
          * @memberof sync.IdentifierIntervalMsg
          * @instance
          */
@@ -1010,7 +1037,7 @@ $root.sync = (function() {
 
         /**
          * IdentifierIntervalMsg end.
-         * @member {number}end
+         * @member {number} end
          * @memberof sync.IdentifierIntervalMsg
          * @instance
          */
@@ -1088,13 +1115,14 @@ $root.sync = (function() {
          * Properties of a QuerySyncMsg.
          * @memberof sync
          * @interface IQuerySyncMsg
-         * @property {Object.<string,number>} [vector] QuerySyncMsg vector
+         * @property {Object.<string,number>|null} [vector] QuerySyncMsg vector
          */
 
         /**
          * Constructs a new QuerySyncMsg.
          * @memberof sync
          * @classdesc Represents a QuerySyncMsg.
+         * @implements IQuerySyncMsg
          * @constructor
          * @param {sync.IQuerySyncMsg=} [properties] Properties to set
          */
@@ -1108,7 +1136,7 @@ $root.sync = (function() {
 
         /**
          * QuerySyncMsg vector.
-         * @member {Object.<string,number>}vector
+         * @member {Object.<string,number>} vector
          * @memberof sync.QuerySyncMsg
          * @instance
          */
@@ -1187,14 +1215,15 @@ $root.sync = (function() {
          * Properties of a ReplySyncMsg.
          * @memberof sync
          * @interface IReplySyncMsg
-         * @property {Array.<sync.IRichLogootSOperationMsg>} [richLogootSOpsMsg] ReplySyncMsg richLogootSOpsMsg
-         * @property {Array.<sync.IIntervalMsg>} [intervals] ReplySyncMsg intervals
+         * @property {Array.<sync.IRichLogootSOperationMsg>|null} [richLogootSOpsMsg] ReplySyncMsg richLogootSOpsMsg
+         * @property {Array.<sync.IIntervalMsg>|null} [intervals] ReplySyncMsg intervals
          */
 
         /**
          * Constructs a new ReplySyncMsg.
          * @memberof sync
          * @classdesc Represents a ReplySyncMsg.
+         * @implements IReplySyncMsg
          * @constructor
          * @param {sync.IReplySyncMsg=} [properties] Properties to set
          */
@@ -1209,7 +1238,7 @@ $root.sync = (function() {
 
         /**
          * ReplySyncMsg richLogootSOpsMsg.
-         * @member {Array.<sync.IRichLogootSOperationMsg>}richLogootSOpsMsg
+         * @member {Array.<sync.IRichLogootSOperationMsg>} richLogootSOpsMsg
          * @memberof sync.ReplySyncMsg
          * @instance
          */
@@ -1217,7 +1246,7 @@ $root.sync = (function() {
 
         /**
          * ReplySyncMsg intervals.
-         * @member {Array.<sync.IIntervalMsg>}intervals
+         * @member {Array.<sync.IIntervalMsg>} intervals
          * @memberof sync.ReplySyncMsg
          * @instance
          */
@@ -1301,15 +1330,16 @@ $root.sync = (function() {
          * Properties of an IntervalMsg.
          * @memberof sync
          * @interface IIntervalMsg
-         * @property {number} [id] IntervalMsg id
-         * @property {number} [begin] IntervalMsg begin
-         * @property {number} [end] IntervalMsg end
+         * @property {number|null} [id] IntervalMsg id
+         * @property {number|null} [begin] IntervalMsg begin
+         * @property {number|null} [end] IntervalMsg end
          */
 
         /**
          * Constructs a new IntervalMsg.
          * @memberof sync
          * @classdesc Represents an IntervalMsg.
+         * @implements IIntervalMsg
          * @constructor
          * @param {sync.IIntervalMsg=} [properties] Properties to set
          */
@@ -1322,7 +1352,7 @@ $root.sync = (function() {
 
         /**
          * IntervalMsg id.
-         * @member {number}id
+         * @member {number} id
          * @memberof sync.IntervalMsg
          * @instance
          */
@@ -1330,7 +1360,7 @@ $root.sync = (function() {
 
         /**
          * IntervalMsg begin.
-         * @member {number}begin
+         * @member {number} begin
          * @memberof sync.IntervalMsg
          * @instance
          */
@@ -1338,7 +1368,7 @@ $root.sync = (function() {
 
         /**
          * IntervalMsg end.
-         * @member {number}end
+         * @member {number} end
          * @memberof sync.IntervalMsg
          * @instance
          */
@@ -1413,6 +1443,115 @@ $root.sync = (function() {
         };
 
         return IntervalMsg;
+    })();
+
+    sync.DotMsg = (function() {
+
+        /**
+         * Properties of a DotMsg.
+         * @memberof sync
+         * @interface IDotMsg
+         * @property {number} replicaNumber DotMsg replicaNumber
+         * @property {number} clock DotMsg clock
+         */
+
+        /**
+         * Constructs a new DotMsg.
+         * @memberof sync
+         * @classdesc Represents a DotMsg.
+         * @implements IDotMsg
+         * @constructor
+         * @param {sync.IDotMsg=} [properties] Properties to set
+         */
+        function DotMsg(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * DotMsg replicaNumber.
+         * @member {number} replicaNumber
+         * @memberof sync.DotMsg
+         * @instance
+         */
+        DotMsg.prototype.replicaNumber = 0;
+
+        /**
+         * DotMsg clock.
+         * @member {number} clock
+         * @memberof sync.DotMsg
+         * @instance
+         */
+        DotMsg.prototype.clock = 0;
+
+        /**
+         * Creates a new DotMsg instance using the specified properties.
+         * @function create
+         * @memberof sync.DotMsg
+         * @static
+         * @param {sync.IDotMsg=} [properties] Properties to set
+         * @returns {sync.DotMsg} DotMsg instance
+         */
+        DotMsg.create = function create(properties) {
+            return new DotMsg(properties);
+        };
+
+        /**
+         * Encodes the specified DotMsg message. Does not implicitly {@link sync.DotMsg.verify|verify} messages.
+         * @function encode
+         * @memberof sync.DotMsg
+         * @static
+         * @param {sync.IDotMsg} message DotMsg message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        DotMsg.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.replicaNumber);
+            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.clock);
+            return writer;
+        };
+
+        /**
+         * Decodes a DotMsg message from the specified reader or buffer.
+         * @function decode
+         * @memberof sync.DotMsg
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {sync.DotMsg} DotMsg
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        DotMsg.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.sync.DotMsg();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.replicaNumber = reader.int32();
+                    break;
+                case 2:
+                    message.clock = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("replicaNumber"))
+                throw $util.ProtocolError("missing required 'replicaNumber'", { instance: message });
+            if (!message.hasOwnProperty("clock"))
+                throw $util.ProtocolError("missing required 'clock'", { instance: message });
+            return message;
+        };
+
+        return DotMsg;
     })();
 
     return sync;

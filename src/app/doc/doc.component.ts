@@ -36,7 +36,7 @@ export enum VIEWPORT {
   providers: [RichCollaboratorsService, SyncStorageService],
 })
 @Injectable()
-export class DocComponent implements OnDestroy, OnInit, OnChanges {
+export class DocComponent implements OnDestroy, OnInit {
   @ViewChild('infoSidenav') infoSidenav
 
   @ViewChild('editorComponent') editor: EditorComponent

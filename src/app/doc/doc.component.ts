@@ -228,7 +228,7 @@ export class DocComponent implements OnDestroy, OnInit {
   }
 
   initLogs(): void {
-    this.logs = new LogsService(this.doc.key)
+    this.logs = new LogsService(this.doc.key, this.doc.shareLogs)
     this.logs.setDisplayLogs(this.settings.displayLogs)
     // unsubscribe all subscription if there are some left (in the case you create a document while one is already open)
     if (this.logsSubs.length !== 0) {

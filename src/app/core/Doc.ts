@@ -2,6 +2,7 @@ import { File } from './File'
 
 export class Doc extends File {
   public key: string
+  public shareLogs: boolean
   public remotes: Array<{
     id: string
     synchronized?: Date
@@ -11,6 +12,7 @@ export class Doc extends File {
     const doc = new Doc()
     doc.remotes = serialized.remotes || []
     doc.key = serialized.key
+    doc.shareLogs = serialized.shareLogs
     doc.deserialize(id, serialized)
     return doc
   }
@@ -26,6 +28,7 @@ export class Doc extends File {
 
   constructor() {
     super()
+    this.shareLogs = false
   }
 
   get isDoc() {
@@ -59,6 +62,7 @@ export class Doc extends File {
       type: 'doc',
       key: this.key,
       remotes: this.remotes,
+      shareLogs: this.shareLogs,
     })
   }
 }

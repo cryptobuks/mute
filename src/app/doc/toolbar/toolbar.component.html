@@ -23,9 +23,6 @@
       </button>
       <mute-profile class="action"></mute-profile>
     </div>
-    <mat-slide-toggle [checked]="doc.shareLogs" (change)="updateShareLogs($event)">
-      Share Logs
-    </mat-slide-toggle>
   </div>
 </mat-toolbar>
 
@@ -34,4 +31,16 @@
     Version history
   </button>
   <button mat-menu-item (click)="inviteBot()" [disabled]="botNotAvailable">Invite bot storage</button>
+  <div>
+    <mat-radio-group [(ngModel)]="doc.logsStrategy" (change)="updateLogsStrategy($event)">
+      <mat-radio-button value="sendall">Send all logs since doc's creation</mat-radio-button>
+      <mat-radio-button value="sendifactivate">Send logs since we activate them</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <hr>
+  <div>
+    <mat-slide-toggle [checked]="doc.shareLogs" (change)="updateShareLogs($event)">
+      Share Logs
+    </mat-slide-toggle>
+  </div>
 </mat-menu>

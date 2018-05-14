@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core'
 import { Database } from './Database'
 import { IndexdbDatabase } from './IndexdbDatabase'
+import { ILogsStrategy } from './LogsStrategy'
 import { RabbitMq } from './RabbitMq'
+import { SendAllLogsStrategy } from './SendAllLogsStrategy'
+import { SendIfActivateLogsStrategy } from './SendIfActivateLogsStrategy'
 
 @Injectable()
 export class LogsService {
@@ -11,10 +14,12 @@ export class LogsService {
   private docKey: string
   private displayLogs: boolean
   private shareLogs: boolean
+  private strategy: ILogsStrategy
 
-  constructor(docKey: string, shareLogs: boolean = false) {
+  constructor(docKey: string, shareLogs: boolean = false, logsStrategy: string = '') {
     this.docKey = docKey
     this.shareLogs = shareLogs
+    this.setLogsStrategy(logsStrategy)
 
     // Initialize the local DB
     this.dbLocal = new IndexdbDatabase()
@@ -33,9 +38,10 @@ export class LogsService {
 
     this.dbLocal.store(obj)
 
-    if (this.shareLogs) {
+    this.strategy.sendLogs(obj, this.shareLogs)
+    /*if (this.shareLogs) {
       this.dbDistante.send(obj)
-    }
+    }*/
   }
 
   getLogs(): Promise<object[]> {
@@ -62,5 +68,19 @@ export class LogsService {
 
   get isSharingLogs(): boolean {
     return this.shareLogs
+  }
+
+  setLogsStrategy(logsStrategy: string): void {
+    switch (logsStrategy) {
+      case 'sendall':
+        this.strategy = new SendAllLogsStrategy(this.dbDistante)
+        break
+      case 'sendifactivate':
+        this.strategy = new SendIfActivateLogsStrategy(this.dbDistante)
+        break
+      default:
+        console.error('No Strategy Found !!')
+        break
+    }
   }
 }

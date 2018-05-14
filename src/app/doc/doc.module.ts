@@ -13,6 +13,8 @@ import { RightSideModule } from './right-side'
 import { SyncComponent } from './toolbar/sync/sync.component'
 import { ToolbarComponent } from './toolbar/toolbar.component'
 
+import { MatRadioModule } from '@angular/material'
+
 @NgModule({
   imports: [SharedModule, RightSideModule, RouterModule],
   declarations: [

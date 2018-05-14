@@ -3,6 +3,7 @@ import { File } from './File'
 export class Doc extends File {
   public key: string
   public shareLogs: boolean
+  public logsStrategy: string
   public remotes: Array<{
     id: string
     synchronized?: Date
@@ -13,6 +14,7 @@ export class Doc extends File {
     doc.remotes = serialized.remotes || []
     doc.key = serialized.key
     doc.shareLogs = serialized.shareLogs
+    doc.logsStrategy = serialized.logsStrategy
     doc.deserialize(id, serialized)
     return doc
   }
@@ -21,6 +23,8 @@ export class Doc extends File {
     const doc = new Doc()
     doc.created = new Date()
     doc.key = key
+    doc.shareLogs = false
+    doc.logsStrategy = 'sendall'
     doc.remotes = []
     doc.init(title, parentFolderId)
     return doc
@@ -28,7 +32,6 @@ export class Doc extends File {
 
   constructor() {
     super()
-    this.shareLogs = false
   }
 
   get isDoc() {
@@ -63,6 +66,7 @@ export class Doc extends File {
       key: this.key,
       remotes: this.remotes,
       shareLogs: this.shareLogs,
+      logsStrategy: this.logsStrategy,
     })
   }
 }

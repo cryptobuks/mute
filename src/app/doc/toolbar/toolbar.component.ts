@@ -14,6 +14,7 @@ export class ToolbarComponent {
   @Input() doc: Doc
   @Output() menu: EventEmitter<void>
   @Output() info: EventEmitter<void>
+  @Output() logs: EventEmitter<[boolean, string]>
   @ViewChild('input') input: ElementRef
 
   public botNotAvailable: boolean
@@ -21,6 +22,7 @@ export class ToolbarComponent {
   constructor(private network: NetworkService, private botStorage: BotStorageService, private localStorage: LocalStorageService) {
     this.menu = new EventEmitter()
     this.info = new EventEmitter()
+    this.logs = new EventEmitter()
     this.botNotAvailable = true
     botStorage.onStatus.subscribe((code) => (this.botNotAvailable = code !== BotStorageService.AVAILABLE))
   }
@@ -41,11 +43,13 @@ export class ToolbarComponent {
   updateShareLogs(event) {
     this.doc.shareLogs = event.checked
     this.localStorage.save(this.doc)
+    this.logs.emit([this.doc.shareLogs, this.doc.logsStrategy])
   }
 
   updateLogsStrategy(event) {
     // console.log(event, this.doc)
     this.localStorage.save(this.doc)
+    this.logs.emit([this.doc.shareLogs, this.doc.logsStrategy])
   }
 
   selectTitle() {

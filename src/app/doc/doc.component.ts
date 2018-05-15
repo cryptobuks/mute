@@ -310,6 +310,13 @@ export class DocComponent implements OnDestroy, OnInit {
     this.logsSubs.forEach((s) => s.unsubscribe())
   }
 
+  changeLogsParameter(event) {
+    // event [0] -> shareLogs
+    this.logs.setShareLogs(event[0])
+    // event [1] -> logsStrategy
+    this.logs.setLogsStrategy(event[1])
+  }
+
   private withEncryption() {
     this.muteCore.collaboratorsService.messageSource = this.network.onMessage
     this.muteCore.syncMessageService.messageSource = this.network.onMessage.pipe(

@@ -19,16 +19,15 @@ export class LogsService {
   constructor(docKey: string, shareLogs: boolean = false, logsStrategy: string = '') {
     this.docKey = docKey
     this.shareLogs = shareLogs
-    this.setLogsStrategy(logsStrategy)
 
     // Initialize the local DB
     this.dbLocal = new IndexdbDatabase()
     this.dbLocal.init('muteLogs-' + this.docKey)
 
     // Initialize the distant DB
-    if (this.shareLogs) {
-      this.dbDistante = new RabbitMq(this.docKey)
-    }
+    this.dbDistante = new RabbitMq(this.docKey)
+
+    this.setLogsStrategy(logsStrategy)
   }
 
   log(obj: object) {
@@ -59,8 +58,8 @@ export class LogsService {
     this.displayLogs = display
   }
 
-  toogleLogs(): void {
-    this.shareLogs = !this.shareLogs
+  setShareLogs(share: boolean): void {
+    this.shareLogs = share
     if (this.shareLogs && this.dbDistante === null) {
       this.dbDistante = new RabbitMq(this.docKey)
     }
@@ -73,10 +72,14 @@ export class LogsService {
   setLogsStrategy(logsStrategy: string): void {
     switch (logsStrategy) {
       case 'sendall':
-        this.strategy = new SendAllLogsStrategy(this.dbDistante)
+        if (!(this.strategy instanceof SendAllLogsStrategy)) {
+          this.strategy = new SendAllLogsStrategy(this.dbDistante)
+        }
         break
       case 'sendifactivate':
-        this.strategy = new SendIfActivateLogsStrategy(this.dbDistante)
+        if (!(this.strategy instanceof SendIfActivateLogsStrategy)) {
+          this.strategy = new SendIfActivateLogsStrategy(this.dbDistante)
+        }
         break
       default:
         console.error('No Strategy Found !!')

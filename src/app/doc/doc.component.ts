@@ -312,7 +312,7 @@ export class DocComponent implements OnDestroy, OnInit {
 
   changeLogsParameter(event) {
     // event [0] -> shareLogs
-    this.logs.setShareLogs(event[0])
+    this.logs.setShareLogs(event[0], this.muteCore.syncService.getVector)
     // event [1] -> logsStrategy
     this.logs.setLogsStrategy(event[1])
   }

@@ -24,6 +24,8 @@ const selectListForDoc = [
   'opened',
   'modified',
   'description',
+  'shareLogs',
+  'logsStrategy',
 ]
 
 const DB_NAME_PREFIX = 'documents_v0.4.0_v2 -'

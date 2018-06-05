@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core'
 import { Database } from './Database'
-import { IndexdbDatabase } from './IndexdbDatabase'
 import { LogsStrategy } from './LogsStrategy'
 import { RabbitMq } from './RabbitMq'
 import { SendAllLogsStrategy } from './SendAllLogsStrategy'

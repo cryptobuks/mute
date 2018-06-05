@@ -11,6 +11,7 @@ export class Doc extends File {
 
   static deserialize(id: string, serialized: any): Doc {
     const doc = new Doc()
+    console.log('serialized !', serialized)
     doc.remotes = serialized.remotes || []
     doc.key = serialized.key
     doc.shareLogs = serialized.shareLogs

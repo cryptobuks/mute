@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core'
-import { Database } from './Database'
 import { LogsStrategy } from './LogsStrategy'
-import { RabbitMq } from './RabbitMq'
 import { SendAllLogsStrategy } from './SendAllLogsStrategy'
 import { SendIfActivateLogsStrategy } from './SendIfActivateLogsStrategy'
 
 @Injectable()
 export class LogsService {
-  private dbLocal: Database
-  private dbDistante: RabbitMq
-
   private docKey: string
   private displayLogs: boolean
   private strategy: LogsStrategy
@@ -24,6 +19,14 @@ export class LogsService {
   log(obj: object) {
     if (this.displayLogs) {
       console.log('[LOGS]', obj)
+    }
+    // context is a Map, so it can't be stringify -> we have to convert it
+    if (obj['context']) {
+      const tab = {}
+      obj['context'].forEach((v, k) => {
+        tab[k] = v
+      })
+      obj['context'] = tab
     }
     this.strategy.sendLogs(obj, this.shareLogs)
   }
